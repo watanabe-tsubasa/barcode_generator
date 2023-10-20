@@ -1,16 +1,17 @@
-import { useState } from 'react'
-import { Box, Button } from '@chakra-ui/react'
+import { Box } from '@chakra-ui/react'
+import { PageBody } from './components/organisums/PageBody'
+import { PageHeader } from './components/organisums/PageHeader'
+import { PageFooter } from './components/organisums/PageFooter'
 
 
 function App() {
-  const [count, setCount] = useState(0)
 
   return (
     <>
       <Box>
-        <Button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </Button>
+        <PageHeader />
+        <PageBody />
+        <PageFooter />
       </Box>
     </>
   )

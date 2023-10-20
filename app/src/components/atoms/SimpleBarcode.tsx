@@ -23,7 +23,7 @@ export const SimpleBarcode: React.FC<SimpleBarcodeProps> = ({ value }) => {
   }, [value]);
 
   return (
-    <Box display="inline-block" padding={2} boxShadow="md" borderRadius="lg">
+    <Box m='6'>
       <svg ref={barcodeRef}></svg>
     </Box>
   )
