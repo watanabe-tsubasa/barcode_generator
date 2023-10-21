@@ -1,7 +1,7 @@
 import { Box } from '@chakra-ui/react'
-import { PageBody } from './components/organisums/PageBody'
-import { PageHeader } from './components/organisums/PageHeader'
-import { PageFooter } from './components/organisums/PageFooter'
+import { PageBody } from './components/PageContents/PageBody'
+import { PageHeader } from './components/PageContents/PageHeader'
+import { PageFooter } from './components/PageContents/PageFooter'
 
 
 function App() {
