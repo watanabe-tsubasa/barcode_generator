@@ -1,0 +1,3 @@
+[build]
+  command = "cd app && bun run build"
+  publish = "app/dist"
