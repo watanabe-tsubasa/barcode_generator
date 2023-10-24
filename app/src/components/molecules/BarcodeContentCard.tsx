@@ -1,6 +1,8 @@
 import { Card, CardBody, Flex, Heading } from "@chakra-ui/react"
 import { SimpleBarcode } from "../atoms/SimpleBarcode"
 import { BarcodeContentCardProps } from "../types/types"
+import { ErrorBoundary } from "react-error-boundary"
+import { SimpleSkelton } from "../atoms/SimpleSkelton"
 
 export const BarcodeContentCard: React.FC<BarcodeContentCardProps> = ({ code, content}) => {
 
@@ -12,7 +14,9 @@ export const BarcodeContentCard: React.FC<BarcodeContentCardProps> = ({ code, co
       m='2'
     >
       <Flex minW='140px' justify='center' align='center'>
-        <SimpleBarcode value={code} />
+        <ErrorBoundary fallback={<SimpleSkelton word='不適切な文字列です' />}>
+          <SimpleBarcode value={code} format='CODE128' />
+        </ErrorBoundary>
       </Flex>
       <CardBody w='140px'>
         <Flex h='100%' w='100%' justify='center' align='center' overflow='initial'>
