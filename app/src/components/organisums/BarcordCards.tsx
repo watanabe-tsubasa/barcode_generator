@@ -4,12 +4,16 @@ import { useState } from "react";
 import Encoding from "encoding-japanese";
 import { BarcodeContentCardProps } from "../types/types"
 import { useCommonToast } from "../Hooks/commonToast";
+import { useCodeContext } from "../contexts/codeContext";
+import { CodeTypeMenuButton } from "../atoms/CodeTypeMenuButton";
 
 
 export const BarcodeCards = () => {
 
   const [contentList, setContentList] = useState<BarcodeContentCardProps[] | []>([]);
   const showToast = useCommonToast()
+
+  const { codeType } = useCodeContext();
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
@@ -46,7 +50,7 @@ export const BarcodeCards = () => {
       .map(x => x.replace(/^"(.*)"$/, '$1'))
       .map(line => line.split(','));
       const data = lines.slice(1).map(list => {
-        return {code: list[0], content: list[1]}
+        return {code: list[0], content: list[1], codeType: codeType}
       });
       setContentList(data);
     };
@@ -65,6 +69,7 @@ export const BarcodeCards = () => {
     <Box>
       <Flex justify='center'>
         <ButtonGroup>
+          <CodeTypeMenuButton />
           <input type='file' onChange={handleFileChange} style={{ display: "none"}} id="csvFileInput" />
           <label htmlFor="csvFileInput">
             <Button as="span">データ読み込み</Button>
@@ -78,8 +83,8 @@ export const BarcodeCards = () => {
       </Flex>
       <Flex wrap='wrap' justify='center' align='center' h='70vH' overflow='scroll'>
         {contentList.map((elem, idx) => {
-          const { code, content } = elem;
-          return <BarcodeContentCard key={idx} code={code} content={content} />
+          const { code, content, codeType } = elem;
+          return <BarcodeContentCard key={idx} code={code} content={content} codeType={codeType} />
         })}
       </Flex>
     </Box>

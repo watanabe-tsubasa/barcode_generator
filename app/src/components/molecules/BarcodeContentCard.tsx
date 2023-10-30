@@ -4,7 +4,7 @@ import { BarcodeContentCardProps } from "../types/types"
 import { ErrorBoundary } from "react-error-boundary"
 import { SimpleSkelton } from "../atoms/SimpleSkelton"
 
-export const BarcodeContentCard: React.FC<BarcodeContentCardProps> = ({ code, content}) => {
+export const BarcodeContentCard: React.FC<BarcodeContentCardProps> = ({ code, content, codeType}) => {
 
   return (
     <Card
@@ -15,7 +15,7 @@ export const BarcodeContentCard: React.FC<BarcodeContentCardProps> = ({ code, co
     >
       <Flex minW='140px' justify='center' align='center'>
         <ErrorBoundary fallback={<SimpleSkelton word='不適切な文字列です' />}>
-          <SimpleBarcode value={code} format='CODE128' />
+          <SimpleBarcode value={code} format={codeType} />
         </ErrorBoundary>
       </Flex>
       <CardBody w='140px'>

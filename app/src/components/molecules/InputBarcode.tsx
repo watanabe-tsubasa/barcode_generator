@@ -1,9 +1,10 @@
-import { Box, Button, Flex, Input, Menu, MenuButton, MenuItem, MenuList, VStack } from "@chakra-ui/react"
-import React, { useRef, useState } from "react"
+import { Box, Flex, Input, VStack } from "@chakra-ui/react"
+import React, { useState } from "react"
 import { SimpleBarcode } from "../atoms/SimpleBarcode";
 import { SimpleSkelton } from "../atoms/SimpleSkelton";
 import { ErrorBoundary } from "react-error-boundary";
-import { ChevronDownIcon } from "@chakra-ui/icons";
+import { useCodeContext } from "../contexts/codeContext";
+import { CodeTypeMenuButton } from "../atoms/CodeTypeMenuButton";
 
 export const InputBarcode = () => {
 
@@ -12,35 +13,18 @@ export const InputBarcode = () => {
     setCodeText(event.target.value);
   }
 
-  const [selectedCode, setSelectedCode] = useState<'CODE128' | 'EAN13' | 'EAN8'>('CODE128');
-  const menuListRef = useRef(null);
-  const handleMenuItemClick = (event: React.MouseEvent<HTMLDivElement>) => {
-    // data-value属性から選択されたMenuItemの値を取得
-    const target = event.target as HTMLDivElement;
-    const value = target.getAttribute('data-value');
-    if (value === "CODE128" || value === "EAN13" || value === "EAN8") {
-      setSelectedCode(value);
-    }
-  };
+  // const [selectedCode, setSelectedCode] = useState<'CODE128' | 'EAN13' | 'EAN8'>('CODE128');
+  const { codeType } = useCodeContext();
 
   return (
     <Box>
       <Flex justify='center'>
         <VStack maxW='300px' minW='200px' >
-          <Menu>
-            <MenuButton as={Button} rightIcon={<ChevronDownIcon />}>
-              {selectedCode}
-            </MenuButton>
-            <MenuList ref={menuListRef} onClick={handleMenuItemClick}>
-              <MenuItem data-value="CODE128">CODE128</MenuItem>
-              <MenuItem data-value="EAN13">EAN13</MenuItem>
-              <MenuItem data-value="EAN8">EAN8</MenuItem>
-            </MenuList>
-          </Menu>
+          <CodeTypeMenuButton />
           <Input bg='whitesmoke' onChange={onChangeCode} placeholder="input code" value={codeText}/>
-          {codeText === '' ? <SimpleSkelton word={selectedCode} /> : 
+          {codeText === '' ? <SimpleSkelton word={codeType} /> : 
           <ErrorBoundary fallback={<SimpleSkelton word='不適切な文字列です' />}>
-            <SimpleBarcode value={codeText} format={selectedCode} />
+            <SimpleBarcode value={codeText} format={codeType} />
           </ErrorBoundary>
           }
         </VStack>
