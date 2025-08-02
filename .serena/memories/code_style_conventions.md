@@ -1,0 +1,1 @@
+The project adheres to standard TypeScript and React best practices, enforced by ESLint with `@typescript-eslint/eslint-plugin` and `eslint-plugin-react-hooks`. The `react-refresh/only-export-components` rule is enabled, promoting Fast Refresh compatibility.

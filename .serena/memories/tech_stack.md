@@ -1,0 +1,1 @@
+The project uses React, TypeScript, Vite, Chakra UI, Emotion, JsBarcode, and Encoding-Japanese.

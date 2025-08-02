@@ -1,0 +1,1 @@
+The codebase is structured as a React application. The `src` directory contains the main application logic, including `App.tsx` and `main.tsx`. Components are organized into `atoms`, `molecules`, `organisums`, `PageContents`, `contexts`, `Hooks`, and `types` directories. Assets are in the `assets` directory.
